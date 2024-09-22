@@ -9,8 +9,8 @@ import (
 )
 
 type cmdresult struct {
-	Success bool   `json:"success`
-	Message string `json:"message`
+	Success bool   `json:"success"`
+	Message string `json:"message"`
 }
 
 func homepage(writer http.ResponseWriter, _ *http.Request) {
