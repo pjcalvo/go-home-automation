@@ -1,0 +1,5 @@
+---
+- labels:
+    job: picohumidityexport
+  targets:
+  - 'picohumidity-v1:3030'

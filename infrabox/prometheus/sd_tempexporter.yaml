@@ -1,0 +1,5 @@
+---
+- labels:
+    job: picotempexport
+  targets:
+  - 'picotempexport-v1:3030'
