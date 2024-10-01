@@ -1,0 +1,5 @@
+---
+- labels:
+    job: panicexport
+  targets:
+  - 'panicexport-v1:3030'
