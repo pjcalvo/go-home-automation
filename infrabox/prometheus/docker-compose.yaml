@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.45.0
+    restart: always
+    volumes:
+    - "prom_data:/prometheus"
+    - "./prometheus.yaml:/etc/prometheus/prometheus.yml:ro" 
+    ports:
+    - 9090:9090 
+    networks:
+    - prom_net 
+    extra_hosts:
+    - "rpi-host:192.168.38.1"
+  node_exporter:
+    privileged: true
+    image: quay.io/prometheus/node-exporter:v1.6.1 
+    command:
+      - "--path.rootfs=/host"
+    pid: host
+    restart: always
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    expose:
+    - 9100 
+    network_mode: host
+
+volumes:
+  prom_data: {}
+
+networks:
+  prom_net:
+    driver: bridge 
+    ipam:
+      config:
+      - subnet: 192.168.38.0/24
+        gateway: 192.168.38.1
